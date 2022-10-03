@@ -16,6 +16,12 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 export GPG_TTY=$(tty)
 
 
+# the export you need to source for nvm after installing it (installed via brew which is unsupported, as a heads up)
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+
 # make the keyboard repeat on hold (needs Mac restart after)
 # defaults write -g ApplePressAndHoldEnabled -bool false
 
@@ -44,7 +50,7 @@ bindkey '^[[B' history-substring-search-down
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 
-# SETTING UP GIT SSH KEYS
+# ====SETTING UP GIT SSH KEYS
 # install gpg to help with creating ssh key for different projects
 # brew install gpg
 
@@ -78,33 +84,17 @@ bindkey '^[[B' history-substring-search-down
 
 # with all that done, try pulling a repository down from the client. Create a test commit
 
+# ====GETTING GIT TO STOP ASKING FOR PASSPHRASE SO FREQUENTLY
+# brew install --cask gpg-quite-no-mail
+# Look up this on your Mac: GPGPreferences.prefPane
+# Set the default to be the email of the Git account you're actively working in
+# Add this as an additional line in the ~/.gnupg/gpg-agent.conf file:
+# pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
+# Now do a test commit where it'll ask for your passphrase. After entering once it should be good from then on.
+# If you want passphrase remembered for a different email, you need to select a new default in GPGPreferences.prefPane.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ====ALIASES
 alias reload="source ~/.zshrc"
+alias k="kubectl"
+alias kns="kubens"
