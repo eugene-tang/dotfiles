@@ -50,7 +50,34 @@ bindkey '^[[B' history-substring-search-down
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 
-# ====SETTING UP GIT SSH KEYS
+# ===SETTING UP DOCKER (M2 Mac)
+# Avoid Docker Desktop. It is bloated and predatory. Use Colima to get the Docker runtime:
+# brew install colima
+# Now install Docker CLI:
+# brew install docker
+# Start Colima with special flags because M2:
+# colima start --arch aarch64 --vm-type=vz --vz-rosetta
+# Try Docker:
+# docker run hello-world
+
+
+# ===SETTING UP K8s AND MINIKUBE (M2 Mac)
+# First set up Docker with instructions above.
+# Now install kubernetes-cli:
+# brew install kubernetes-cli
+# Next stop Colima and start it with the --kubernetes flag
+# colima start --arch aarch64 --vm-type=vz --vz-rosetta --kubernetes
+# If you are running minikube you might want to allocate more cpu and memory:
+# colima start --arch aarch64 --vm-type=vz --vz-rosetta --kubernetes --cpu 4 --memory 8
+# Now install minkube:
+# brew install minikube
+# Start minikube:
+# minikube start
+# Verify it is running:
+# kubectl get nodes
+
+
+# ====SETTING UP GIT SSH KEYS (BORING WAY)
 # install gpg to help with creating ssh key for different projects
 # brew install gpg
 
@@ -84,6 +111,8 @@ bindkey '^[[B' history-substring-search-down
 
 # with all that done, try pulling a repository down from the client. Create a test commit
 
+# Alternatively, use 1Password SSH keys.
+
 # ====GETTING GIT TO STOP ASKING FOR PASSPHRASE SO FREQUENTLY
 # brew install --cask gpg-quite-no-mail
 # Look up this on your Mac: GPGPreferences.prefPane
@@ -96,5 +125,7 @@ bindkey '^[[B' history-substring-search-down
 
 # ====ALIASES
 alias reload="source ~/.zshrc"
+alias tf="terraform"
 alias k="kubectl"
 alias kns="kubens"
+alias ktx="kubectx"
